@@ -45,10 +45,10 @@ void drive(float radians, float speed = 1, byte rotation = 0)
 	}
 	else if (rotation > 20 || rotation < -20)
 	{
-		motor[frontLeft] = rotation;
-		motor[frontRight] = rotation;
-		motor[rearLeft] = rotation;
-		motor[rearRight] = rotation;
+		motor[frontLeft] = -rotation;
+		motor[frontRight] = -rotation;
+		motor[rearLeft] = -rotation;
+		motor[rearRight] = -rotation;
 	}
 	else
 	{
@@ -65,7 +65,7 @@ typedef struct
 	float speed;
 } PolarJoystick;
 
-void getPolar(float *radians, float *speed, TVexJoysticks joy_x = Ch2, TVexJoysticks joy_y = Ch1) {
+void getPolar(float *radians, float *speed, TVexJoysticks joy_x = Ch3, TVexJoysticks joy_y = Ch4) {
 	byte x_val = vexRT[joy_x];
 	byte y_val = vexRT[joy_y];
 	if((abs(x_val) < 20) && (abs(y_val) < 20)) {

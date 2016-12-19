@@ -20,7 +20,7 @@ void drive(type mode){
 	if(mode == trig){
 		PolarJoystick joystick;
 		getPolar(&joystick.radians, &joystick.speed);
-		drive(joystick.radians, joystick.speed, vexRT[Ch4]);
+		drive(joystick.radians, joystick.speed, vexRT[Ch1]);
 		wait1Msec(10); //needs to be tested
 	}
 	else if(mode == norm){
@@ -33,18 +33,18 @@ void drive(type mode){
 
 void lift(){
 	if(vexRT[Btn5U] || vexRT[Btn6U]){
-		motor[topRight] = 127;
-		motor[bottomRight] = 127;
-
-		motor[topLeft] = -127;
-		motor[bottomLeft] = -127;
-	}
-	else if(vexRT[Btn5D] || vexRT[Btn6D]){
 		motor[topRight] = -127;
 		motor[bottomRight] = -127;
 
 		motor[topLeft] = 127;
 		motor[bottomLeft] = 127;
+	}
+	else if(vexRT[Btn5D] || vexRT[Btn6D]){
+		motor[topRight] = 127;
+		motor[bottomRight] = 127;
+
+		motor[topLeft] = -127;
+		motor[bottomLeft] = -127;
 	}
 	else{
 		motor[topRight] = 0;
