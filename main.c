@@ -9,13 +9,20 @@
 
 #include "includes.h";
 
+/* User-defined "modes" of operation for debugging purposes */
 typedef enum {
 	trig = 1,
 	norm = 2
 } type;
 
+/* Define mode */
 const type mode = trig;
 
+/* Code for driving
+ * 
+ * For trig mode, use the x and y positions of each joystick
+ * For normal mode, use standard methods (adding and subtracting joystick channels)
+ */
 void drive(type mode){
 	if(mode == trig){
 		PolarJoystick joystick;
@@ -30,6 +37,7 @@ void drive(type mode){
 		motor[rearLeft] = -vexRT[Ch2] + vexRT[Ch4] + vexRT[Ch1];
 	}
 }
+
 
 void lift(){
 	if(vexRT[Btn5U] || vexRT[Btn6U]){
