@@ -27,7 +27,7 @@ void drive(type mode){
 	if(mode == trig){
 		PolarJoystick joystick;
 		getPolar(&joystick.radians, &joystick.speed);
-		drive(joystick.radians, joystick.speed, vexRT[Ch1]);
+		move(joystick.radians, joystick.speed, vexRT[Ch1]);
 		wait1Msec(10); //needs to be tested
 	}
 	else if(mode == norm){
@@ -38,7 +38,13 @@ void drive(type mode){
 	}
 }
 
-
+/* Code for lift
+ * When top trigger buttons are pressed,
+ * Set the motors to move the lift up.
+ *
+ * When bottom trigger buttons are pressed,
+ * Set the motors to move the lift down.
+ */
 void lift(){
 	if(vexRT[Btn5U] || vexRT[Btn6U]){
 		motor[topRight] = -127;

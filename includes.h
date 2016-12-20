@@ -1,6 +1,6 @@
 #define MAX_SPEED 127
 
-//**-----------------------SUPPORT FUNCTIONS-----------------------------------**//
+/* Function to find maximum value in an array of 10 floats */
 
 float FindMaxFloat(float a, float b,  float c = (0), float d = (0), float e = (0),
 float f = (0), float g = (0), float h = (0), float i = (0), float j = (0))
@@ -12,9 +12,13 @@ float f = (0), float g = (0), float h = (0), float i = (0), float j = (0))
 	}
 	return maxValue;
 }
-//**-----------------------MAIN FUNCTIONS------------------------------------**//
 
-void drive(float radians, float speed = 1, byte rotation = 0)
+/* Main code for movement
+ *
+ * Note that radians and speeds are passed in from drive(),
+ * and that the values are taken from the getPolar() function
+ */
+void move(float radians, float speed = 1, byte rotation = 0)
 {
 	if(speed > 0)
 	{
@@ -65,6 +69,12 @@ typedef struct
 	float speed;
 } PolarJoystick;
 
+
+/* Basic trig...
+ * atan of Ch3 and Ch4 gives the angle of the joystick
+ * sqrt(Ch3^2 + Ch4^2) yields the amount the joystick is being pushed, which
+ * is then taken out of 127
+ */
 void getPolar(float *radians, float *speed, TVexJoysticks joy_x = Ch3, TVexJoysticks joy_y = Ch4) {
 	byte x_val = vexRT[joy_x];
 	byte y_val = vexRT[joy_y];
