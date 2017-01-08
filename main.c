@@ -25,9 +25,9 @@ const type mode = trig;
  */
 void drive(type mode){
 	if(mode == trig){
-		PolarJoystick joystick;
-		getPolar(&joystick.radians, &joystick.speed);
-		move(joystick.radians, joystick.speed, vexRT[Ch1]);
+		Joystick joystick;
+		getPolar(&joystick.rad, &joystick.speed);
+		move(joystick.rad, joystick.speed, vexRT[Ch1]);
 		wait1Msec(10); //needs to be tested
 	}
 	else if(mode == norm){
