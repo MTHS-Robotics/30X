@@ -1,3 +1,4 @@
+#pragma config(Sensor, dgtl1,  intake,         sensorDigitalOut)
 #pragma config(Motor,  port2,           rearLeft,      tmotorVex393, openLoop)
 #pragma config(Motor,  port3,           frontLeft,     tmotorVex393, openLoop)
 #pragma config(Motor,  port4,           frontRight,    tmotorVex393, openLoop)
@@ -19,7 +20,7 @@ typedef enum {
 const type mode = trig;
 
 /* Code for driving
- * 
+ *
  * For trig mode, use the x and y positions of each joystick
  * For normal mode, use standard methods (adding and subtracting joystick channels)
  */
@@ -38,6 +39,17 @@ void drive(type mode){
 	}
 }
 
+/* Pneumatics code */
+void in(){
+	if(vexRT[Btn6UXmtr2]){
+		SensorValue[intake] = 1;
+  }
+  else if(vexRT[Btn6DXmtr2]){
+  	SensorValue[intake] = 0;
+  }
+}
+
+
 /* Code for lift
  * When top trigger buttons are pressed,
  * Set the motors to move the lift up.
@@ -46,14 +58,16 @@ void drive(type mode){
  * Set the motors to move the lift down.
  */
 void lift(){
-	if(vexRT[Btn5U] || vexRT[Btn6U]){
+	//if(vexRT[Btn5U] || vexRT[Btn6U]){
+  if(vexRT[Btn5UXmtr2]){
 		motor[topRight] = -127;
 		motor[bottomRight] = -127;
 
 		motor[topLeft] = 127;
 		motor[bottomLeft] = 127;
 	}
-	else if(vexRT[Btn5D] || vexRT[Btn6D]){
+//	else if(vexRT[Btn5D] || vexRT[Btn6D]){
+	else if(vexRT[Btn5DXmtr2]){
 		motor[topRight] = 127;
 		motor[bottomRight] = 127;
 
@@ -73,5 +87,6 @@ task main()
 	for(;;){
 		drive(mode);
 		lift();
+		in();
 	}
 }
