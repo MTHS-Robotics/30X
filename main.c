@@ -43,10 +43,10 @@ void drive(type mode){
 void in(){
 	if(vexRT[Btn6UXmtr2]){
 		SensorValue[intake] = 1;
-  }
-  else if(vexRT[Btn6DXmtr2]){
-  	SensorValue[intake] = 0;
-  }
+	}
+	else if(vexRT[Btn6DXmtr2]){
+		SensorValue[intake] = 0;
+	}
 }
 
 
@@ -58,15 +58,13 @@ void in(){
  * Set the motors to move the lift down.
  */
 void lift(){
-	//if(vexRT[Btn5U] || vexRT[Btn6U]){
-  if(vexRT[Btn5UXmtr2]){
+	if(vexRT[Btn5UXmtr2]){
 		motor[topRight] = -127;
 		motor[bottomRight] = -127;
 
 		motor[topLeft] = 127;
 		motor[bottomLeft] = 127;
 	}
-//	else if(vexRT[Btn5D] || vexRT[Btn6D]){
 	else if(vexRT[Btn5DXmtr2]){
 		motor[topRight] = 127;
 		motor[bottomRight] = 127;
