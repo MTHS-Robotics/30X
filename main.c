@@ -7,10 +7,29 @@
 #pragma config(Motor,  port7,           bottomRight,   tmotorVex393, openLoop)
 #pragma config(Motor,  port8,           topLeft,       tmotorVex393, openLoop)
 #pragma config(Motor,  port9,           bottomLeft,    tmotorVex393, openLoop)
+#pragma config(Motor,  port10,          roll,      tmotorVex393, openLoop)
 
+#pragma platform(VEX)
 #include "includes.h";
 
-/* User-defined "modes" of operation for debugging purposes */
+//Competition Control and Duration Settings
+#pragma competitionControl(Competition)
+#pragma autonomousDuration(20)
+#pragma userControlDuration(120)
+
+#include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
+
+void pre_auton()
+{
+  bStopTasksBetweenModes = true;
+	// All activities that occur before the competition starts
+	// Example: clearing encoders, setting servo positions, ...
+}
+task autonomous()
+{
+	AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
+}
+
 typedef enum {
 	trig = 1,
 	norm = 2
@@ -79,12 +98,26 @@ void lift(){
 		motor[bottomLeft] = 0;
 	}
 }
-
-task main()
+void antiRoll(){
+	if(vexRT[Btn7L]){
+		motor[roll] = -127;
+	}
+	else if(vexRT[Btn8R]){
+		motor[roll] = 127;
+	}
+	else{
+		motor[roll] = 0;
+	}
+}
+task usercontrol()
 {
-	for(;;){
-		drive(mode);
-		lift();
-		in();
+	while (true)
+	{
+		for(;;){
+			drive(mode);
+			lift();
+			in();
+			antiRoll();
+		}
 	}
 }
