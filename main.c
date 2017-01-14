@@ -11,7 +11,6 @@
 
 #pragma platform(VEX)
 
-
 //Competition Control and Duration Settings
 #pragma competitionControl(Competition)
 #pragma autonomousDuration(20)
@@ -27,21 +26,26 @@ void pre_auton()
 }
 task autonomous()
 {
-	wait1Msec(2000);
-
-	nMotorEncoder[frontLeft] = 0;
-	nMotorEncoder[frontRight] = 0;
-	
-	motor[frontLeft] = 127;
+	motor[frontLeft] = -127;
 	motor[frontRight] = 127;
-	motor[rearLeft] = 127;
+	motor[rearLeft] = -127;
 	motor[rearRight] = 127;
-	
+	motor[roll] = 127;
+
+	wait1Msec(3000);
+
+	motor[frontLeft] = 0;
+	motor[frontRight] = 0;
+	motor[rearLeft] = 0;
+	motor[rearRight] = 0;
+	motor[roll] = 127;
+
 	wait1Msec(10000);
+
 	StopTask(autonomous);
 }
 	/*while( 1=1)
- forward();		
+ forward();
 if nMotorEncoder[frontLeft] < 0.9 nMotorEncoder[frontRight])
 	{
 		//Move forward at partial power
@@ -106,6 +110,12 @@ float MaxFloat(Outputs *nums){
  * Note that rad and speeds are passed in from drive(),
  * and that the values are taken from the getPolar() function
  */
+
+
+
+
+
+
 void move(float rad, float speed = 1, byte rotation = 0)
 {
 	if(speed > 0)
@@ -177,6 +187,7 @@ void getPolar(float *rad, float *speed, TVexJoysticks joy_x = Ch3, TVexJoysticks
  * For normal mode, use standard methods (adding and subtracting joystick channels)
  */
 void drive(type mode){
+
 	if(mode == trig){
 		Joystick joystick;
 		getPolar(&joystick.rad, &joystick.speed);
