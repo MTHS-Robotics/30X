@@ -124,14 +124,11 @@ void antiRoll(){
 }
 task usercontrol()
 {
-	while (true)
-	{
-		for(;;){
-			drive(mode);
-			lift();
-			in();
-			antiRoll();
-		}
+	for(;;){
+		drive(mode);
+		lift();
+		in();
+		antiRoll();
 	}
 }
 	/*while( 1=1)
