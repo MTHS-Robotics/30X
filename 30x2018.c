@@ -109,7 +109,7 @@ task autonomous() {
 
 #define MAX_SPEED 127
 
-twypedef struct {
+typedef struct {
 	float frontLeft;
 	float frontRight;
 	float rearRight;
@@ -206,7 +206,7 @@ void getPolar(float *rad, float *speed, TVexJoysticks joy_x = Ch3, TVexJoysticks
 	//tolerances
 	if((abs(x_val) < 20) && (abs(y_val) < 20)) {
 		*rad = 0;
-		*speed = 0;nmm.
+		*speed = 0;
 	}
 	else {
 		*rad = atan2(y_val,x_val);
